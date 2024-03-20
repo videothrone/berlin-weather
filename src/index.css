@@ -1,0 +1,61 @@
+:root {
+  font-family: Fanwood Text, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #000;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-size: 400% 400%;
+  background-image: radial-gradient(#f9efef 0,#f6a18c 40%,#fae64a 60%,#ff5252 80%);
+  animation: IndexBackgroundAnimation 25s ease infinite;
+}
+
+@keyframes IndexBackgroundAnimation {
+  0% {
+    background-position:0 50%
+  }
+  50% {
+    background-position:100% 50%
+  }
+  to {
+    background-position:0 50%
+  }
+}
+
+.fanwood-text-regular {
+  font-family: "Fanwood Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.fanwood-text-regular-italic {
+  font-family: "Fanwood Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+h1 {
+  font-size: 3.2em;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
