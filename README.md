@@ -1,6 +1,6 @@
 # Berlin Weather
 
-This is a very early React-based WIP weather dashboard for Berlin using the Open Weather Map API. The plan is to show the weather data in some viual ways (like the backgroudn changing to the weather) and maybe expand it to a PWA down the line.
+This is a very early React-based WIP weather dashboard for Berlin using the Open Weather Map API. The plan is to show the weather data in some visual ways (like the background changing to the weather) and maybe expand it to a PWA down the line.
 
 ## Local setup
 
