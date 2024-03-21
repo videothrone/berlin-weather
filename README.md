@@ -4,9 +4,15 @@ This is a very early React-based WIP weather dashboard for Berlin using the Open
 
 ## Local setup
 
+- Get a free API-Key from https://openweathermap.org/api
 - Clone the repo
+- Add a `.env`. The correct format is:
+```
+VITE_OPEN_WEATHER_API_ID=YourAPIKey
+```
 - Run `npm i`
 - Run `npm start`
+- Et voilà
 
 ## Live
 
