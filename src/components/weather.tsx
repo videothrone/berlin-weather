@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './weather.css';
 
 export default function Weather() {
-  const [number, setNumber] = useState<number | undefined>();
+  const [number, setNumber] = useState<number>(0);
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
 
   useEffect(() => {
