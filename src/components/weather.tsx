@@ -70,7 +70,7 @@ export default function Weather() {
 
   return (
       <div className="weather">
-        <h1 className='weather__title'>BERLIN TEMPERATURE TODAY:</h1>
+        <h1 className='weather__title'>BERLIN WEATHER TODAY:</h1>
         <div className='weather__temperature'>{temperature}° Celsius</div>
         <div className='weather__sunrise-sunset-container'>
           <div className='weather__sunrise-sunset'>
