@@ -12,9 +12,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
 
+.day {
   background-size: 400% 400%;
   background-image: radial-gradient(#f9efef 0,#f6a18c 40%,#fae64a 60%,#ff5252 80%);
+  animation: IndexBackgroundAnimation 25s ease infinite;
+}
+
+.night {
+  background-size: 400% 400%;
+  background-image: radial-gradient(#f9efef 0,#766aff 40%,#3a10f6 60%,#000000 80%);
   animation: IndexBackgroundAnimation 25s ease infinite;
 }
 
