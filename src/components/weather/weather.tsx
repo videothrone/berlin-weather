@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Loader from '../loader/loader.tsx';
+import { isItDayOrNight } from '../../helperFunctions.tsx';
 import './weather.scss';
 
 export default function Weather() {
@@ -7,11 +9,11 @@ export default function Weather() {
   const [sunset, setSunset] = useState<string>('');
   const [timeNow, setTimeNow] = useState<string>('');
   const [dayOrNight, setDayOrNight] = useState<string>('');
+  const [loader, setLoader] = useState<boolean>(true);
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
-  const html = document.querySelector('html');
 
   // Update the timeNow state every second
-  useEffect(() => {
+ useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
       const nowString = now.toLocaleTimeString();
@@ -23,19 +25,13 @@ export default function Weather() {
   // Update the dayOrNight state based on the current time
   useEffect(() => {
     const interval = setInterval(() => {
-      const sunriseTime = new Date(sunrise);
-      const sunsetTime = new Date(sunset);
-      const timeNowTime = new Date(timeNow);
 
-      if (timeNowTime >= sunriseTime && timeNowTime < sunsetTime) {
-        setDayOrNight('day');
-        html?.classList.remove('night');
-        html?.classList.add('day');
-      } else {
-        setDayOrNight('night');
-        html?.classList.remove('day');
-        html?.classList.add('night');
-      }
+      /* console.log('timeNow: ', timeNow);
+      console.log('sunrise: ', sunrise);
+      console.log('sunset: ', sunset); */
+      const dayOrNight = isItDayOrNight(timeNow, sunrise, sunset);
+
+      setDayOrNight(dayOrNight);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -55,11 +51,19 @@ export default function Weather() {
         const sunsetTime = new Date(data.sys.sunset * 1000);
         const sunriseString = sunriseTime.toLocaleTimeString();
         const sunsetString = sunsetTime.toLocaleTimeString();
+        const now = new Date();
+        const nowString = now.toLocaleTimeString();
+        setTimeNow(nowString);
+
+        /* console.log('initial effect runs, it is: ', timeNow); */
+
+        const dayOrNight = isItDayOrNight(timeNow, sunriseString, sunsetString);
+
+        setDayOrNight(dayOrNight);
         setSunrise(sunriseString);
         setSunset(sunsetString);
-
         setTemperature(temperatureRounded);
-
+        setLoader(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -69,6 +73,7 @@ export default function Weather() {
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
   return (
+    loader ? <Loader /> :
       <div className="weather">
         <h1 className='weather__title'>BERLIN WEATHER TODAY:</h1>
         <div className='weather__temperature'>{temperature}° Celsius</div>
