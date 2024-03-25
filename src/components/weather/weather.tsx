@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Loader from '../loader/loader.tsx';
-import { isItDayOrNight } from '../../helperFunctions.tsx';
+/* import { isItDayOrNight } from '../../helperFunctions.tsx'; */
 import './weather.scss';
 
 export default function Weather() {
@@ -11,6 +11,7 @@ export default function Weather() {
   const [dayOrNight, setDayOrNight] = useState<string>('');
   const [loader, setLoader] = useState<boolean>(true);
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
+  const html = document.querySelector('html');
 
   // Update the timeNow state every second
  useEffect(() => {
@@ -18,20 +19,6 @@ export default function Weather() {
       const now = new Date();
       const nowString = now.toLocaleTimeString();
       setTimeNow(nowString);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Update the dayOrNight state based on the current time
-  useEffect(() => {
-    const interval = setInterval(() => {
-
-      /* console.log('timeNow: ', timeNow);
-      console.log('sunrise: ', sunrise);
-      console.log('sunset: ', sunset); */
-      const dayOrNight = isItDayOrNight(timeNow, sunrise, sunset);
-
-      setDayOrNight(dayOrNight);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -55,11 +42,16 @@ export default function Weather() {
         const nowString = now.toLocaleTimeString();
         setTimeNow(nowString);
 
-        /* console.log('initial effect runs, it is: ', timeNow); */
+        if (nowString >= sunriseString && nowString < sunsetString) {
+          html?.classList.remove('night');
+          html?.classList.add('day');
+          setDayOrNight('day');
+        } else {
+          html?.classList.remove('day');
+          html?.classList.add('night');
+          setDayOrNight('night');
+        }
 
-        const dayOrNight = isItDayOrNight(timeNow, sunriseString, sunsetString);
-
-        setDayOrNight(dayOrNight);
         setSunrise(sunriseString);
         setSunset(sunsetString);
         setTemperature(temperatureRounded);
@@ -71,6 +63,27 @@ export default function Weather() {
 
     getWeatherData();
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
+
+  // Update the dayOrNight state based on the current time
+/*   useEffect(() => {
+    const interval = setInterval(() => {
+
+      console.log(timeNow);
+      console.log(sunrise);
+      console.log(sunset);
+
+      if (timeNow >= sunrise && timeNow < sunset) {
+        html?.classList.remove('night');
+        html?.classList.add('day');
+        setDayOrNight('day');
+      } else {
+        html?.classList.remove('day');
+        html?.classList.add('night');
+        setDayOrNight('night');
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []); */
 
   return (
     loader ? <Loader /> :
