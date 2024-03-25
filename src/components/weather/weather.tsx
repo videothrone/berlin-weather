@@ -14,7 +14,7 @@ export default function Weather() {
   const html = document.querySelector('html');
 
   // Update the timeNow state every second
- useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
       const nowString = now.toLocaleTimeString();
@@ -24,12 +24,7 @@ export default function Weather() {
   }, []);
 
   useEffect(() => {
-    /**
-     * Retrieves weather data for Berlin, Germany from the OpenWeatherMap API.
-     *
-     * @return {Promise<void>} Returns a promise that resolves when the weather data has been fetched and processed.
-     */
-    async function getWeatherData() {
+    async function getWeatherData(): Promise<void> {
       try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Berlin,Germany&APPID=${openWeatherAPIKey}&units=metric`);
         const data = await response.json();
@@ -65,13 +60,8 @@ export default function Weather() {
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
   // Update the dayOrNight state based on the current time
-/*   useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
-
-      console.log(timeNow);
-      console.log(sunrise);
-      console.log(sunset);
-
       if (timeNow >= sunrise && timeNow < sunset) {
         html?.classList.remove('night');
         html?.classList.add('day');
@@ -83,12 +73,12 @@ export default function Weather() {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, []); */
+  }, [dayOrNight, timeNow, sunrise, sunset]);
 
   return (
     loader ? <Loader /> :
       <div className="weather">
-        <h1 className='weather__title'>BERLIN WEATHER TODAY:</h1>
+        <h1 className='weather__title'>BERLIN WEATHER:</h1>
         <div className='weather__temperature'>{temperature}° Celsius</div>
         <div className='weather__sunrise-sunset-container'>
           <div className='weather__sunrise-sunset'>
