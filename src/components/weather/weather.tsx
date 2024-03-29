@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Loader from '../loader/loader.tsx';
-/* import { isItDayOrNight } from '../../helperFunctions.tsx'; */
+import { isItDayOrNight, switchBackground } from '../../helperFunctions.tsx';
+import { makeApiCall } from '../makeApiCall.tsx';
 import './weather.scss';
 
 export default function Weather() {
@@ -10,67 +11,33 @@ export default function Weather() {
   const [timeNow, setTimeNow] = useState<string>('');
   const [dayOrNight, setDayOrNight] = useState<string>('');
   const [loader, setLoader] = useState<boolean>(true);
-  const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
-  const html = document.querySelector('html');
-
-  // Update the timeNow state every second
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const nowString = now.toLocaleTimeString();
-      setTimeNow(nowString);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
-    async function getWeatherData(): Promise<void> {
-      try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Berlin,Germany&APPID=${openWeatherAPIKey}&units=metric`);
-        const data = await response.json();
-        const temperatureRounded = Math.round(data.main.temp);
-        const sunriseTime = new Date(data.sys.sunrise * 1000);
-        const sunsetTime = new Date(data.sys.sunset * 1000);
-        const sunriseString = sunriseTime.toLocaleTimeString();
-        const sunsetString = sunsetTime.toLocaleTimeString();
-        const now = new Date();
-        const nowString = now.toLocaleTimeString();
-        setTimeNow(nowString);
+    makeApiCall().
+      then(({ nowString, sunriseString, sunsetString, temperatureRounded }) => {
+        const dayOrNight = isItDayOrNight(nowString, sunriseString, sunsetString);
 
-        if (nowString >= sunriseString && nowString < sunsetString) {
-          html?.classList.remove('night');
-          html?.classList.add('day');
-          setDayOrNight('day');
-        } else {
-          html?.classList.remove('day');
-          html?.classList.add('night');
-          setDayOrNight('night');
-        }
-
+        setTemperature(temperatureRounded);
         setSunrise(sunriseString);
         setSunset(sunsetString);
-        setTemperature(temperatureRounded);
+        setTimeNow(nowString);
+        setDayOrNight(dayOrNight);
+        switchBackground(dayOrNight);
         setLoader(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
-    getWeatherData();
-  }, []); // Empty dependency array ensures the effect runs only once after the initial render
-
-  // Update the dayOrNight state based on the current time
+  // Update the state every second based on the current time, set the day or night indicator
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timeNow >= sunrise && timeNow < sunset) {
-        html?.classList.remove('night');
-        html?.classList.add('day');
-        setDayOrNight('day');
-      } else {
-        html?.classList.remove('day');
-        html?.classList.add('night');
-        setDayOrNight('night');
-      }
+      const dayOrNight = isItDayOrNight(timeNow, sunrise, sunset);
+      const now = new Date();
+      const nowString = now.toLocaleTimeString();
+
+      setDayOrNight(dayOrNight);
+      switchBackground(dayOrNight);
+      setTimeNow(nowString);
     }, 1000);
     return () => clearInterval(interval);
   }, [dayOrNight, timeNow, sunrise, sunset]);
