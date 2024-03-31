@@ -18,8 +18,6 @@ export const makeApiCall = async (): Promise<{
       const nowString = now.toLocaleTimeString();
       const temperatureRounded = Math.round(data.main.temp);
 
-      console.log('MakeAPIcall Runs');
-
       return {
         nowString,
         sunriseString,

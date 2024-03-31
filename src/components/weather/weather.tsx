@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Loader from '../loader/loader.tsx';
-import { isItDayOrNight, switchBackground } from '../../helperFunctions.tsx';
-import { makeApiCall } from '../makeApiCall.tsx';
+import { isItDayOrNight, switchBackground } from '../helpers/helperFunctions.tsx';
+import { makeApiCall } from '../helpers/makeApiCall.tsx';
 import './weather.scss';
 
 export default function Weather() {
