@@ -23,7 +23,7 @@ VITE_OPEN_WEATHER_API_ID=YourAPIKey
 - Built with Vite / React
 - Weather data is pulled from the Open Weather Map API
 - Background color animations done with CSS keyframes
-- Uses Typescript, but probably in weird / insufficient way, since I'm Typescript noob 🙃
+- Uses Typescript, but probably in weird / insufficient ways, since I'm Typescript noob 🙃
 
 ## Features
 
