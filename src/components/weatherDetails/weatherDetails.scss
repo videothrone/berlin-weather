@@ -1,0 +1,19 @@
+.weather-details__temperature {
+  font-size: var(--font-size-default);
+}
+
+.weather-details__sunrise-sunset,
+.weather-details__sunrise,
+.weather-details__sunset {
+  font-size: 1.8rem;
+}
+
+.weather-details__day-or-night {
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+}
+
+.weather-details__day-or-night-indicator {
+  margin-left: 0.2rem;
+}

@@ -1,52 +1,17 @@
 .weather {
   align-items: center;
+  border: 0.2rem solid var(--color-black);
   display: flex;
   justify-content: center;
   height: 100%;
   flex-direction: column;
-  margin: 2rem;
+  margin-top: 5rem;
+  padding: 2rem;
+  width: fit-content;
 }
 
 @media screen and (max-width: 768px) {
   .weather {
     justify-content: flex-start;
   }
-}
-
-.weather__title {
-  text-decoration: underline;
-}
-
-@media screen and (max-width: 768px) {
-  .weather__title {
-    font-size: 2rem;
-  }
-}
-
-.weather__temperature {
-  font-size: 1.8rem;
-}
-
-@media screen and (max-width: 768px) {
-  .weather__temperature {
-    margin-top: 3rem;
-  }
-}
-
-.weather__sunrise,
-.weather__sunset {
-  /* font-weight: bold; */
-}
-
-.weather__day-or-night {
-  display: flex;
-  justify-content: center;
-}
-
-.weather__day-or-night-indicator {
-  margin-left: 0.2rem;
-}
-
-.weather__time-now {
-  font-size: 1.8rem;
 }

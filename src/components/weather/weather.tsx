@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import Loader from '../loader/loader.tsx';
+import WeatherDetails from '../weatherDetails/weatherDetails.tsx';
+import TimeNow from '../timeNow/timeNow.tsx';
 import { isItDayOrNight, switchBackground } from '../helpers/helperFunctions.tsx';
 import { makeApiCall } from '../helpers/makeApiCall.tsx';
 import './weather.scss';
@@ -45,18 +47,13 @@ export default function Weather() {
   return (
     loader ? <Loader /> :
       <div className="weather">
-        <h1 className='weather__title'>BERLIN WEATHER:</h1>
-        <div className='weather__temperature'>{temperature}° Celsius</div>
-        <div className='weather__sunrise-sunset-container'>
-          <div className='weather__sunrise-sunset'>
-            <span className='weather__sunrise fanwood-text-regular-italic'>Sunrise:</span> {sunrise} / <span className='weather__sunset fanwood-text-regular-italic'>Sunset:</span> {sunset}
-          </div>
-          <div className='weather__day-or-night'>
-            It is <span className='weather__day-or-night-indicator fanwood-text-regular-italic'>{dayOrNight}</span>
-          </div>
-
-        </div>
-        <div className='weather__time-now'>{timeNow}</div>
+        <WeatherDetails
+          temperature={temperature}
+          sunrise={sunrise}
+          sunset={sunset}
+          dayOrNight={dayOrNight}
+        />
+        <TimeNow timeNow={timeNow} />
       </div>
   )
 }

@@ -1,0 +1,29 @@
+.header {
+  align-items: center;
+  border-bottom: 0.2rem solid var(--color-black);
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.header__icon {
+  flex-shrink: 0;
+  width: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header__icon  {
+    width: 2rem;
+  }
+}
+
+.header__headline  {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header__headline  {
+    font-size: 3rem;
+  }
+}

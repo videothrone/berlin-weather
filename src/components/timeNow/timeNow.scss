@@ -1,0 +1,15 @@
+.weather__time-now-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.weather__time-now-icon {
+  font-size: 2rem;
+}
+
+.weather__time-now {
+  font-size: var(--font-size-default);
+  margin-top: -0.5rem;
+}
