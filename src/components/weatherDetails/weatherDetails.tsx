@@ -1,7 +1,8 @@
+import Daylight from '../daylight/daylight';
 import './weatherDetails.scss';
 
-export default function WeatherDetails({ temperature, sunrise, sunset, dayOrNight }:
-  { temperature: number, sunrise: string, sunset: string, dayOrNight: string }) {
+export default function WeatherDetails({ temperature, sunrise, sunset, dayOrNight, remainingDaylight }:
+  { temperature: number, sunrise: string, sunset: string, dayOrNight: string, remainingDaylight: string }) {
   return (
     <>
       <div className='weather-details__temperature'>
@@ -14,6 +15,7 @@ export default function WeatherDetails({ temperature, sunrise, sunset, dayOrNigh
         <div className='weather-details__day-or-night'>
           It is <span className='weather-details__day-or-night-indicator fanwood-text-regular-italic'>{dayOrNight}</span>
         </div>
+        <Daylight className='weather-details__daylight' remainingDaylight={remainingDaylight}/>
       </div>
     </>
   )

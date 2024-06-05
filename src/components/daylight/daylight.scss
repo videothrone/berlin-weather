@@ -1,0 +1,19 @@
+.weather__daylight {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather__daylight-text-headline {
+  font-size: var(--font-size-small);
+  font-style: italic;
+  margin: 0;
+}
+
+.weather__daylight-text {
+  font-size: var(--font-size-small);
+  text-align: center;
+}
+

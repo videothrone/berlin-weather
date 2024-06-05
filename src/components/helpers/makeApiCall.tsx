@@ -2,7 +2,8 @@ export const makeApiCall = async (): Promise<{
   nowString: string;
   sunriseString: string;
   sunsetString: string;
-  temperatureRounded: number; }> => {
+  temperatureRounded: number;
+  countdown: string; }> => {
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
 
     try {
@@ -12,6 +13,27 @@ export const makeApiCall = async (): Promise<{
       const sunriseTime = new Date(data.sys.sunrise * 1000);
       const sunsetTime = new Date(data.sys.sunset * 1000);
       const now = new Date();
+
+      // Calculate the difference in milliseconds
+      const difference = sunsetTime.getTime() - now.getTime();
+
+      // Calculate the remaining days, hours, minutes, and seconds
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      const timeString = [];
+
+      if (hours > 0) {
+        timeString.push(`${hours}h`);
+      }
+      if (minutes > 0) {
+        timeString.push(`${minutes}m`);
+      }
+      timeString.push(`${seconds}s`);
+
+      const countdown = timeString.join(" ✹ ");
+
 
       const sunriseString = sunriseTime.toLocaleTimeString();
       const sunsetString = sunsetTime.toLocaleTimeString();
@@ -23,6 +45,7 @@ export const makeApiCall = async (): Promise<{
         sunriseString,
         sunsetString,
         temperatureRounded,
+        countdown
       };
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -30,7 +53,8 @@ export const makeApiCall = async (): Promise<{
         nowString: '',
         sunriseString: '',
         sunsetString: '',
-        temperatureRounded: 0
+        temperatureRounded: 0,
+        countdown: ''
       };
-    };
+    }
 }
