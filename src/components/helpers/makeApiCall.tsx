@@ -1,9 +1,12 @@
-export const makeApiCall = async (): Promise<{
+interface WeatherData {
   nowString: string;
   sunriseString: string;
   sunsetString: string;
   temperatureRounded: number;
-  countdown: string; }> => {
+  countdown: string;
+}
+
+export const makeApiCall = async (): Promise<WeatherData> => {
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
 
     try {
