@@ -43,6 +43,30 @@ export default function Weather() {
       const now = new Date();
       const nowString = now.toLocaleTimeString();
 
+      // Parse time string into hours, minutes, seconds
+      const [hoursStr, minutesStr, secondsStr] = remainingDaylight.split(' ✹ ');
+      const hours = parseInt(hoursStr.slice(0, -1), 10);
+      const minutes = parseInt(minutesStr.slice(0, -1), 10);
+      const seconds = parseInt(secondsStr.slice(0, -1), 10);
+
+      // Decrement time
+      let newSeconds = seconds - 1;
+      let newMinutes = minutes;
+      let newHours = hours;
+
+      // Handle carry-over
+      if (newSeconds < 0) {
+        newSeconds = 59;
+        newMinutes -= 1;
+      }
+      if (newMinutes < 0) {
+        newMinutes = 59;
+        newHours -= 1;
+      }
+
+      // Update time remaining string
+      setRemainingDaylight(`${newHours}h ✹ ${newMinutes}m ✹ ${newSeconds}s`);
+
       setDayOrNight(dayOrNight);
       switchBackground(dayOrNight);
       setTimeNow(nowString);

@@ -1,4 +1,4 @@
-/* import Daylight from '../daylight/daylight'; */
+import Daylight from '../daylight/daylight';
 import './weatherDetails.scss';
 
 export default function WeatherDetails({ temperature, sunrise, sunset, weatherIcon, weatherDescription, dayOrNight, remainingDaylight }:
@@ -21,7 +21,9 @@ export default function WeatherDetails({ temperature, sunrise, sunset, weatherIc
         <div className='weather-details__day-or-night'>
           It is <span className='weather-details__day-or-night-indicator fanwood-text-regular-italic'>{dayOrNight}</span>
         </div>
-          {/* <Daylight className='weather-details__daylight' remainingDaylight={remainingDaylight}/> */}
+        {remainingDaylight !== '0h ✹ 0m ✹ 0s' && (
+          <Daylight className='weather-details__daylight' remainingDaylight={remainingDaylight}/>
+        )}
       </div>
     </div>
   )
