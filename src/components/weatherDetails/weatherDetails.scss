@@ -1,4 +1,15 @@
-.weather-details__temperature {
+.weather-details__weather {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.weather-details__weather-icon {
+  height: 3rem;
+  width: 3rem;
+}
+
+.weather-details__weather-temperature {
   font-size: var(--font-size-default);
 }
 

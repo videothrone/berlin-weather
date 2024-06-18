@@ -10,6 +10,8 @@ export default function Weather() {
   const [temperature, setTemperature] = useState<number>(0);
   const [sunrise, setSunrise] = useState<string>('');
   const [sunset, setSunset] = useState<string>('');
+  const [weatherIcon, setWeatherIcon] = useState<string>('');
+  const [weatherDescription, setWeatherDescription] = useState<string>('');
   const [timeNow, setTimeNow] = useState<string>('');
   const [dayOrNight, setDayOrNight] = useState<string>('');
   const [loader, setLoader] = useState<boolean>(true);
@@ -17,10 +19,12 @@ export default function Weather() {
 
   useEffect(() => {
     makeApiCall().
-      then(({ nowString, sunriseString, sunsetString, temperatureRounded, countdown }) => {
+      then(({ nowString, sunriseString, sunsetString, temperatureRounded, weatherIcon, weatherDescription, countdown }) => {
         const dayOrNight = isItDayOrNight(nowString, sunriseString, sunsetString);
 
         setTemperature(temperatureRounded);
+        setWeatherIcon(weatherIcon);
+        setWeatherDescription(weatherDescription);
         setSunrise(sunriseString);
         setSunset(sunsetString);
         setTimeNow(nowString);
@@ -30,7 +34,7 @@ export default function Weather() {
         setRemainingDaylight(countdown);
       })
       .catch((error) => console.error(error));
-  }, [timeNow]);
+  }, []);
 
   // Update the state every second based on the current time, set the day or night indicator
   useEffect(() => {
@@ -53,6 +57,8 @@ export default function Weather() {
           temperature={temperature}
           sunrise={sunrise}
           sunset={sunset}
+          weatherIcon={weatherIcon}
+          weatherDescription={weatherDescription}
           dayOrNight={dayOrNight}
           remainingDaylight={remainingDaylight}
         />
