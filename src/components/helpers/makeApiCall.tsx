@@ -3,6 +3,8 @@ interface WeatherData {
   sunriseString: string;
   sunsetString: string;
   temperatureRounded: number;
+  weatherIcon: string;
+  weatherDescription: string;
   countdown: string;
 }
 
@@ -42,12 +44,16 @@ export const makeApiCall = async (): Promise<WeatherData> => {
       const sunsetString = sunsetTime.toLocaleTimeString();
       const nowString = now.toLocaleTimeString();
       const temperatureRounded = Math.round(data.main.temp);
+      const weatherIcon = data.weather[0].icon;
+      const weatherDescription = data.weather[0].description;
 
       return {
         nowString,
         sunriseString,
         sunsetString,
         temperatureRounded,
+        weatherIcon,
+        weatherDescription,
         countdown
       };
     } catch (error) {
@@ -57,6 +63,8 @@ export const makeApiCall = async (): Promise<WeatherData> => {
         sunriseString: '',
         sunsetString: '',
         temperatureRounded: 0,
+        weatherIcon: '',
+        weatherDescription: '',
         countdown: ''
       };
     }
