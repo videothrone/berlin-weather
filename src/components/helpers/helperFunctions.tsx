@@ -17,3 +17,9 @@ export const switchBackground = (dayOrNight: string) => {
     html?.classList.add('night');
   }
 }
+
+export const getTimeNow = () => {
+    const now = new Date();
+    const timeNow = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    return timeNow;
+}
