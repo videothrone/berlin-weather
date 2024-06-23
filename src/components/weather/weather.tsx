@@ -16,10 +16,19 @@ export default function Weather() {
   const [dayOrNight, setDayOrNight] = useState<string>('');
   const [loader, setLoader] = useState<boolean>(true);
   const [remainingDaylight, setRemainingDaylight] = useState<string>('');
+  const [chanceOfRain, setChanceOfRain] = useState<number>(0);
 
   useEffect(() => {
     makeApiCall().
-      then(({ nowString, sunriseString, sunsetString, temperatureRounded, weatherIcon, weatherDescription, countdown }) => {
+      then(({
+        nowString,
+        sunriseString,
+        sunsetString,
+        temperatureRounded,
+        weatherIcon,
+        weatherDescription,
+        countdown,
+        chanceOfRain }) => {
         const dayOrNight = isItDayOrNight(nowString, sunriseString, sunsetString);
 
         setTemperature(temperatureRounded);
@@ -32,6 +41,7 @@ export default function Weather() {
         switchBackground(dayOrNight);
         setLoader(false);
         setRemainingDaylight(countdown);
+        setChanceOfRain(chanceOfRain);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -85,6 +95,7 @@ export default function Weather() {
           weatherDescription={weatherDescription}
           dayOrNight={dayOrNight}
           remainingDaylight={remainingDaylight}
+          chanceOfRain={chanceOfRain}
         />
         <TimeNow
           className='weather__time-now'

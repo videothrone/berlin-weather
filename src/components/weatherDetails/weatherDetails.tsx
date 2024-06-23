@@ -1,8 +1,23 @@
 import Daylight from '../daylight/daylight';
 import './weatherDetails.scss';
 
-export default function WeatherDetails({ temperature, sunrise, sunset, weatherIcon, weatherDescription, dayOrNight, remainingDaylight }:
-  { temperature: number, sunrise: string, sunset: string, weatherIcon: string, weatherDescription: string, dayOrNight: string, remainingDaylight: string }) {
+export default function WeatherDetails({
+  temperature,
+  sunrise,
+  sunset,
+  weatherIcon,
+  weatherDescription,
+  dayOrNight,
+  remainingDaylight,
+  chanceOfRain }:
+  { temperature: number,
+    sunrise: string,
+    sunset: string,
+    weatherIcon: string,
+    weatherDescription: string,
+    dayOrNight: string,
+    remainingDaylight: string,
+    chanceOfRain: number }) {
   return (
     <div className='weather-details'>
       <div className='weather-details__weather'>
@@ -12,6 +27,15 @@ export default function WeatherDetails({ temperature, sunrise, sunset, weatherIc
           alt={weatherDescription} />
         <div className='weather-details__weather-temperature'>
           {temperature}° Celsius
+        </div>
+      </div>
+      <div className='weather-details__chance-of-rain'>
+        Chance of rain &nbsp;
+        <span className='weather-details__chance-of-rain-text-small'>
+        (in the next 3 hours)
+        </span>:
+        <div className='weather-details__chance-of-rain-text-percentage'>
+          {chanceOfRain}%
         </div>
       </div>
       <div className='weather-details__sunrise-sunset-container'>

@@ -6,14 +6,19 @@ interface WeatherData {
   weatherIcon: string;
   weatherDescription: string;
   countdown: string;
+  chanceOfRain: number;
 }
 
 export const makeApiCall = async (): Promise<WeatherData> => {
   const openWeatherAPIKey = import.meta.env.VITE_OPEN_WEATHER_API_ID;
 
     try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Berlin,Germany&APPID=${openWeatherAPIKey}&units=metric`);
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Berlin,Germany&appid=${openWeatherAPIKey}&units=metric`);
       const data = await response.json();
+
+      const responseForecast =  await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Berlin,Germany&units=metric&appid=${openWeatherAPIKey}`);
+      const forecast = await responseForecast.json();
+      const chanceOfRain = forecast.list[0].pop * 100;
 
       const sunriseTime = new Date(data.sys.sunrise * 1000);
       const sunsetTime = new Date(data.sys.sunset * 1000);
@@ -54,7 +59,8 @@ export const makeApiCall = async (): Promise<WeatherData> => {
         temperatureRounded,
         weatherIcon,
         weatherDescription,
-        countdown
+        countdown,
+        chanceOfRain
       };
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -65,7 +71,8 @@ export const makeApiCall = async (): Promise<WeatherData> => {
         temperatureRounded: 0,
         weatherIcon: '',
         weatherDescription: '',
-        countdown: ''
+        countdown: '',
+        chanceOfRain: 0
       };
     }
 }

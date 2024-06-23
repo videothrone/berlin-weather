@@ -13,6 +13,22 @@
   font-size: var(--font-size-default);
 }
 
+.weather-details__chance-of-rain {
+  font-size: 1.8rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.weather-details__chance-of-rain-text-small {
+  font-size: 1.4rem;
+}
+
+.weather-details__chance-of-rain-text-percentage {
+  font-size: 2.8rem;
+  line-height: 0.8;
+  margin: 0 0 1.3rem 0;
+}
+
 .weather-details__sunrise-sunset,
 .weather-details__sunrise,
 .weather-details__sunset {
