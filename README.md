@@ -27,6 +27,6 @@ VITE_OPEN_WEATHER_API_ID=YourAPIKey
 
 ## Features
 
-- Pulls weather data onload, displays temperature, sunrise, sundown and the current time
+- Pulls weather data onload, displays temperature, chance of rain, sunrise, sundown and the current time
 - Checks if it's day or night in Berlin and changes the background color accordingly
 - More TBD
