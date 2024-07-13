@@ -45,7 +45,7 @@ export default function WeatherDetails({
         <div className='weather-details__day-or-night'>
           It is <span className='weather-details__day-or-night-indicator fanwood-text-regular-italic'>{dayOrNight}</span>
         </div>
-        {remainingDaylight !== '0h ✹ 0m ✹ 0s' && (
+        {remainingDaylight !== '0h ✹ 0m ✹ 0s' && dayOrNight !== 'night' && (
           <Daylight className='weather-details__daylight' remainingDaylight={remainingDaylight}/>
         )}
       </div>
