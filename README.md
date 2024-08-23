@@ -18,6 +18,8 @@ VITE_OPEN_WEATHER_API_ID=YourAPIKey
 
 [berlin-weather.netlify.app](https://berlin-weather.netlify.app/)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4515749d-a802-493b-8924-49b6b0a5cb0d/deploy-status)](https://app.netlify.com/sites/berlin-weather/deploys)
+
 ## Tech
 
 - Built with Vite / React
