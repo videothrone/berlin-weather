@@ -59,13 +59,16 @@ export default function Weather() {
   // Update the state every second based on the current time, set the day or night indicator
   useEffect(() => {
     const interval = setInterval(() => {
+      const now = new Date();
+      const nowString = now.toLocaleTimeString();
+
+      setTimeNow(nowString);
+
       const dayOrNight = isItDayOrNight({
-        timeNow,
+        timeNow: nowString,
         sunrise,
         sunset,
       });
-      const now = new Date();
-      const nowString = now.toLocaleTimeString();
 
       // Parse time string into hours, minutes, seconds
       const [hoursStr, minutesStr, secondsStr] = remainingDaylight.split(" ✹ ");
@@ -93,10 +96,10 @@ export default function Weather() {
 
       setDayOrNight(dayOrNight);
       switchBackground(dayOrNight);
-      setTimeNow(nowString);
     }, 1000);
+
     return () => clearInterval(interval);
-  }, [dayOrNight, timeNow, sunrise, sunset]);
+  }, [sunrise, sunset, remainingDaylight]);
 
   return loader ? (
     <Loader />
