@@ -1,16 +1,6 @@
+import { WeatherDetailsProps } from "../../types/types";
 import Daylight from "../daylight/daylight";
 import "./weatherDetails.scss";
-
-type WeatherDetailsProps = {
-  temperature: number;
-  sunrise: string;
-  sunset: string;
-  weatherIcon: string;
-  weatherDescription: string;
-  dayOrNight: string;
-  remainingDaylight: string;
-  chanceOfRain: number;
-};
 
 export default function WeatherDetails({
   temperature,

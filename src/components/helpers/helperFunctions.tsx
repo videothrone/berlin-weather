@@ -1,8 +1,4 @@
-export type isItDayOrNightProps = {
-  timeNow: string;
-  sunrise: string;
-  sunset: string;
-};
+import { isItDayOrNightProps } from "../../types/types";
 
 export const isItDayOrNight = ({
   timeNow,
